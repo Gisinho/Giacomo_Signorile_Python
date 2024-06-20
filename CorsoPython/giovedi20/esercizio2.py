@@ -1,17 +1,17 @@
 #PUNTO 1
-#numero=int(input("Inserisci un numero: "))
+numero=int(input("Inserisci un numero: "))
 
-#if numero%2==0:
- #   print("PARI")
+if numero%2==0:
+    print("PARI")
 #else:
-#    print("DISPARI")
+    print("DISPARI")
 
 #PUNTO2
-#controllo_ciclo=True
-#while controllo_ciclo:
-#    numero=int(input("Inserisci un numero: "))
-#    for i in range(numero,-1, -1):
-#        print(i)
+controllo_ciclo=True
+while controllo_ciclo:
+    numero=int(input("Inserisci un numero: "))
+    for i in range(numero,-1, -1):
+        print(i)
 
 
 #PUNTO3
