@@ -14,7 +14,7 @@ while controllo_ciclo:
         print(i)
 
 
-#PUNTO3
+#PUNTO3 e 4
 # Chiedo all'utente quanti numeri vuole inserire
 conteggio = int(input("Quanti numeri vuoi inserire?: "))
 
