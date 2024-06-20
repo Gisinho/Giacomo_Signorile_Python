@@ -1,62 +1,80 @@
-# Imposta la variabile di controllo per il ciclo principale
-controllo = True
-
-# Chiede all'utente se vuole iniziare
-selezione = input("Vuoi iniziare (si/no): ").lower()
+# Dati degli utenti
+utenti = {
+    "pippo franco": {"password": "cliente", "tipo_utente": "Cliente"},
+    "gino paoli": {"password": "amministrazione", "tipo_utente": "Amministrazione"},
+    "solo frutta": {"password": "admin", "tipo_utente": "Admin"}
+}
 
 # Lista dei prodotti disponibili in inventario
-lista_prodotti = [
-    ["pera", 1.50, 10],
-    ["mela", 1.20, 15],
-    ["banana", 1.80, 12],
-    ["ciliegia", 2.00, 20],
-    ["arancia", 1.00, 25],
-    ["uva", 2.50, 8],
-    ["limone", 1.10, 18],
-    ["pesca", 2.20, 10],
-    ["albicocca", 2.30, 5],
-    ["fragola", 3.00, 6]
-]
+lista_prodotti = {
+    "pera": {"prezzo":1.0, "quantità": 25},
+    "mela": {"prezzo":2.5, "quantità": 15},
+    "banana": {"prezzo":1.5, "quantità": 10},
+    "ciliegia": {"prezzo":1.8, "quantità": 5},
+    "arancia": {"prezzo":2.2, "quantità": 80},
+    "uva": {"prezzo":3.5, "quantità": 20},
+    "limone": {"prezzo":2.0, "quantità": 36},
+    "pesca": {"prezzo":3.2, "quantità": 13},
+    "albicocca": {"prezzo":4.0, "quantità": 11},
+    "fragola":{"prezzo":6.0, "quantità": 8}
+}
 
-# Lista per tenere traccia degli acquisti del cliente
-acquisti_cliente = []
+# Richiesta delle credenziali all'utente
+username = input("Inserisci il tuo username: ")
+password = input("Inserisci la tua password: ")
 
-# Verifica se l'utente vuole iniziare
-if selezione == "si":
-    # Inizia il ciclo principale per l'interazione con l'utente
-    while controllo:
-        # Chiede all'utente se vuole vedere i prodotti
-        selezione2 = input("Vuoi vedere i prodotti (si/no): ").lower()
-        if selezione2 == "si":
-            # Mostra i prodotti disponibili
-            print("Prodotti disponibili in inventario:")
-            for prodotto in lista_prodotti:
-                print(prodotto[0])
+# Verifica se lo username esiste e la password è corretta
+if username in utenti and utenti[username]["password"] == password:
+    tipo_utente = utenti[username]["tipo_utente"]
+    if tipo_utente == "Admin":
+        print("Benvenuto Admin! Hai pieno accesso.")
+    elif tipo_utente == "Amministrazione":
+        print("Benvenuto Amministrazione! Puoi modificare i contenuti.")
+    elif tipo_utente == "Cliente":
+        print("Benvenuto Cliente! Puoi visualizzare i contenuti.")
+        # Imposta la variabile di controllo per il ciclo principale
+        controllo = True
+        # Chiede all'utente se vuole iniziare
+        selezione = input("Vuoi iniziare (si/no): ").lower()
+        # Lista per tenere traccia degli acquisti del cliente
+        acquisti_cliente = []
 
-        # Chiede all'utente se vuole acquistare prodotti
-        selezione3 = input("Vuoi acquistare i prodotti (si/no): ").lower()
-        if selezione3 == "si":
-            # Chiede quale prodotto l'utente vuole acquistare
-            prodotto_da_acquistare = input("Che prodotto vuoi acquistare? ")
-            if prodotto_da_acquistare in lista_prodotti[0]:
-                # Aggiunge il prodotto alla lista degli acquisti del cliente
-                acquisti_cliente.append(prodotto_da_acquistare)
-                print("Hai acquistato: " + prodotto_da_acquistare)
-            else:
+        # Verifica se l'utente vuole iniziare
+        if selezione == "si":
+        # Inizia il ciclo principale per l'interazione con l'utente
+            while controllo:
+            # Chiede all'utente se vuole vedere i prodotti
+                selezione2 = input("Vuoi vedere i prodotti (si/no): ").lower()
+                if selezione2 == "si":
+                    # Mostra i prodotti disponibili
+                    print("Prodotti disponibili in inventario:")
+                    for prodotto in lista_prodotti:
+                        print(prodotto)
+
+                    # Chiede all'utente se vuole acquistare prodotti
+                selezione3 = input("Vuoi acquistare i prodotti (si/no): ").lower()
+                if selezione3 == "si":
+                # Chiede quale prodotto l'utente vuole acquistare
+                    prodotto_da_acquistare = input("Che prodotto vuoi acquistare? ")
+                    if prodotto_da_acquistare in lista_prodotti:
+                    # Aggiunge il prodotto alla lista degli acquisti del cliente
+                        acquisti_cliente.append(prodotto_da_acquistare)
+                
+                    # converte la lista in una stringa separata da virgole
+                    acquisti_stringa = ", ".join(acquisti_cliente)  
+                    print("Hai acquistato: " + acquisti_stringa)
+                else:
                 # Messaggio di errore se il prodotto non è disponibile
-                print("Prodotto non disponibile")
+                    print("Prodotto non disponibile")
 
-        # Chiede all'utente se vuole continuare
-        continuare = input("Vuoi continuare (si/no): ").lower()
-        if continuare != "si":
-            # Esce dal ciclo se l'utente non vuole continuare
-            controllo = False
-
-    # Mostra gli acquisti del cliente
-    print("I tuoi acquisti:")
-    for acquisto in acquisti_cliente:
-        print(acquisto)
-
+                # Chiede all'utente se vuole continuare
+                continuare = input("Vuoi continuare (si/no): ").lower()
+                if continuare != "si":
+                # Esce dal ciclo se l'utente non vuole continuare
+                    controllo = False
+                print("Buona giornata")
 else:
-    # Messaggio di saluto se l'utente non vuole iniziare
-    print("Arrivederci")
+    print("Username o password non validi.")
+
+        
+
