@@ -4,10 +4,23 @@ che hai imparato nella settimana precedente: """
 #Funzione aggiungere film
 def aggiungi_film():
     titolo = input("Inserisci il titolo del film: ")
+    genere = input("Inserisci il genere: ")
+
+    with open("film.csv", "a") as file:
+        file.write(f"{titolo},{genere}")
+        print("Film aggiunto con successo.")
 
 #Funzione per visualizzare i film
 def visualizza_film():
-    print("Visualizza film")
+    try:
+        with open("film.csv", "r") as file:
+            print("\nLista dei film:")
+            for line in file:
+                titolo, genere = line.strip().split(',')
+                print(f"Titolo: {titolo}, Genere: {genere}")
+        print()
+    except FileNotFoundError:
+        print("Nessun film trovato.\n")
 
 #Funzione aggiungere la prenotazione
 def aggiungi_prenotazione():
