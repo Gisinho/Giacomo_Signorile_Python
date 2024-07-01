@@ -1,6 +1,7 @@
 """Es riassuntivo
 Hai 40 min per creare un esercizio che rappresenti tutto quello 
 che hai imparato nella settimana precedente: """
+
 #Funzione aggiungere film
 def aggiungi_film():
     titolo = input("Inserisci il titolo del film: ")
@@ -12,19 +13,27 @@ def aggiungi_film():
 
 #Funzione per visualizzare i film
 def visualizza_film():
-    try:
+        # Apre il file film.csv in reading
         with open("film.csv", "r") as file:
             print("\nLista dei film:")
+            #itera attraverso ciascuna linea del file
             for line in file:
                 titolo, genere = line.strip().split(',')
                 print(f"Titolo: {titolo}, Genere: {genere}")
         print()
-    except FileNotFoundError:
-        print("Nessun film trovato.\n")
+
 
 #Funzione aggiungere la prenotazione
 def aggiungi_prenotazione():
-    print("aggiunta prenotazione")
+    # Richiede l'input dell'utente per il nome, il titolo del film e il numero di posti
+    nome = input("Inserisci il tuo nome: ")
+    titolo_film = input("Inserisci il titolo del film che vuoi prenotare: ")
+    posti = input("Inserisci il numero di posti da prenotare: ")
+
+    # Apre il file prenotazioni.txt in modalità append e scrive i dettagli della prenotazione
+    with open("prenotazioni.csv", "a") as file:
+        file.write(f"{nome},{titolo_film},{posti}\n")
+        print(f"Prenotazione per '{titolo_film}' effettuata con successo")
 
 #Funzione per visualizzare la prenotazione
 def visualizza_prenotazioni():  
