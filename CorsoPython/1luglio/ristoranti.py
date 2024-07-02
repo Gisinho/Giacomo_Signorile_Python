@@ -26,8 +26,8 @@ class Ristorante:
         print(f"Il ristorante {self.nome} è ora chiuso.")
 
     def aggiungi_al_menu(self, piatto, prezzo):
-        piatto = input("Inserisci il nome: ")
-        prezzo = float(input("Inserisci il prezzo: "))
+        piatto = input("Inserisci il nome del piatto: ")
+        prezzo = float(input("Inserisci il prezzo del piatto: "))
         self.menu[piatto] = prezzo
         print(f"{piatto} è stato aggiunto al menu.")
     
@@ -43,6 +43,21 @@ class Ristorante:
         for piatto, prezzo in self.menu.items():
             print(f"{piatto}: €{prezzo}")
 
+
+class Cliente:
+    ordini = []
+    
+    def __init__(self,nome):
+        self.nome = nome
+
+    def ordina(self, ristorante, piatto):
+        if piatto in ristorante.menu:
+            self.ordini.append(piatto)
+            ristorante.ordini.append((self.nome, piatto))
+            print(f"Hai ordinato: {piatto}.")
+        else:
+            print(f"{piatto} non è presente nel menu del ristorante.")
+
 # Test della classe
 ristorante = Ristorante("shaolin", "cinese")
 
@@ -54,7 +69,14 @@ ristorante.stato_apertura()
 ristorante.aggiungi_al_menu("ravioli", 12)
 ristorante.aggiungi_al_menu("nuvola di drago", 8)
 ristorante.stampa_menu()
-ristorante.togli_dal_menu("ravioli")
+"""ristorante.togli_dal_menu("ravioli")
 ristorante.stampa_menu()
 ristorante.chiudi_ristorante()
-ristorante.stato_apertura()
+ristorante.stato_apertura()"""
+
+# Test della classe Utente
+cliente1 = Cliente("Giacomo")
+cliente2 = Cliente("Paolo")
+
+
+
