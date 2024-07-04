@@ -84,7 +84,7 @@ class GestoreParcoVeicoli(Auto,Furgone,Motocicletta):
             else:
                 print(f"Veicolo non trovato: {marca} {modello}")
 
-#Prove
+"""#Prove
 veicolo = GestoreParcoVeicoli()
 
 auto = Auto("Fiat", "Panda", 1990, False, 4)
@@ -101,4 +101,56 @@ veicolo.aggiungi_veicolo(moto)
 # Rimuovi un veicolo
 veicolo.rimuovi_veicolo("Fiat", "Fiorino")
 
-veicolo.lista_veicoli()
+veicolo.lista_veicoli()"""
+
+def menu():
+    gestore_veicolo = GestoreParcoVeicoli()
+    
+    while True:
+        print("\nMenu:")
+        print("1. Aggiungi veicolo")
+        print("2. Rimuovi veicolo")
+        print("3. Visualizza veicoli")
+        print("4. Esci")
+        
+        scelta = input("Seleziona un'opzione: ")
+        
+        if scelta == "1":
+            tipo = input("Inserisci il tipo di veicolo (auto, furgone, motocicletta): ").lower()
+            marca = input("Inserisci la marca: ")
+            modello = input("Inserisci il modello: ")
+            anno = int(input("Inserisci l'anno: "))
+            
+            if tipo == "auto":
+                numero_porte = int(input("Inserisci il numero di porte: "))
+                veicolo = Auto(marca, modello, anno, numero_porte)
+            elif tipo == "furgone":
+                capacita_carico = int(input("Inserisci la capacità di carico: "))
+                capacita_scarico = int(input("Inserisci la capacità di scarico: "))
+                veicolo = Furgone(marca, modello, anno, capacita_carico, capacita_scarico)
+            elif tipo == "motocicletta":
+                tipo_moto = input("Inserisci il tipo di motocicletta (sportivo, altro): ").lower()
+                veicolo = Motocicletta(marca, modello, anno, tipo_moto)
+            else:
+                print("Tipo di veicolo non riconosciuto.")
+                continue
+
+            gestore_veicolo.aggiungi_veicolo(veicolo)
+            print("Veicolo aggiunto con successo.")
+        
+        elif scelta == "2":
+            marca = input("Marca del veicolo da rimuovere: ")
+            modello = input("Modello del veicolo da rimuovere: ")
+            gestore_veicolo.rimuovi_veicolo(marca, modello)
+        
+        elif scelta == "3":
+            gestore_veicolo.lista_veicoli()
+        
+        elif scelta == "4":
+            print("Esci.")
+            break
+        
+        else:
+            print("Opzione non valida. Riprova.")
+
+menu()
