@@ -26,11 +26,25 @@ class Automobile(Veicolo):
 
 
 "Polimorfismo: si riferisce alla capacità di un oggetto di assumere diverse forme. In Python, il polimorfismo si manifesta principalmente attraverso l'overriding dei metodi. Esempio "
-class Animale: 
-    def emetti_suono(self): 
-        print("Suono generico")      
+class Animale:
+    def parla(self):
+        pass
+
+class Cane(Animale):
+    def parla(self):
+        return "Bau"
 
 class Gatto(Animale):
-    def emetti_suono(self): 
-        print("miao")  
-"in questo caso l'emetti suono della claase Gatto sovrascrive l'emetti suono della classe animale cambiandone il funzionamento."
+    def parla(self):
+        return "Miao"
+
+def fai_parlare(animale):
+    print(animale.parla())
+
+#PROVE
+cane = Cane()
+gatto = Gatto()
+
+fai_parlare(cane) 
+fai_parlare(gatto)
+"in questo caso la funzione parla() della claase Gatto sovrascrive la funzione parla() della classe animale cambiandone il funzionamento."
