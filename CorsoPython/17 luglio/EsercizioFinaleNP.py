@@ -1,4 +1,20 @@
-"""Parte 3: Ulteriore Estensione del Menu Interattivo
+"""
+GRUPPO: GIACOMO SIGNORILE, VALENTINA TRULLI
+Parte UNO: Scrivere un Sistema che utilizza NumPy per gestire una matrice 2D. 
+Il programma deve presentare un menu interattivo che consente all'utente di eseguire 
+varie operazioni sulla matrice. Le operazioni disponibili includono:
+Creare una nuova matrice 2D di dimensioni specificate con numeri casuali.
+Estrarre e stampare la sotto-matrice centrale.
+Trasporre la matrice e stamparla.
+Calcolare e stampare la somma di tutti gli elementi della matrice.
+Uscire dal programma.
+Parte DUE: Andare a specializzare per aggiungere nuove operazioni:
+Moltiplicazione Element-wise con un'altra Matrice: L'utente può scegliere 
+di creare una seconda matrice delle stesse dimensioni della prima e moltiplicarle 
+elemento per elemento e stampare il risultato.
+Calcolo della Media degli Elementi della Matrice: Calcolare e stampare la media 
+di tutti gli elementi della matrice.
+Parte 3: Ulteriore Estensione del Menu Interattivo
 Estendere ulteriormente il programma precedente aggiungendo nuove opzioni al menu per permettere ulteriori operazioni sulla matrice. Le nuove operazioni includono:
 Calcolare la matrice inversa (se la matrice è quadrata e invertibile).
 Applicare una funzione matematica a tutti gli elementi della matrice (ad esempio, sin, cos, exp).
