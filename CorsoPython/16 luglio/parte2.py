@@ -7,7 +7,7 @@ di tutti gli elementi della matrice."""
 
 import numpy as np
 def menu():
-    matrice = []
+    matrice = None
     
     while True:
         print("\nMenu:")
@@ -30,21 +30,21 @@ def menu():
             except:
                 print("Per favore, crea prima una matrice.")
         elif scelta == '3':
-            try:
-                matrice_trasposta(matrice)
-            except:
+            if matrice is not None:
+                matrice_trasposta(matrice)    
+            else:
                 print("Per favore, crea prima una matrice.")
         elif scelta == '4':
-            try:
+            if matrice is not None:
                 somma_elementi(matrice)               
-            except:
+            else:
                 print("Per favore, crea prima una matrice.")
         elif scelta == '5':
             try:
                 seconda_matrice = crea_seconda_matrice(n_righe,n_colonne)
                 moltiplica_matrici(matrice,seconda_matrice)
             except:
-                print("Dati inseriti non corretti")
+                print("Bisogna generare la prima matrice")
         elif scelta == '6':
             try:
                 media_matrice(matrice)
@@ -54,7 +54,7 @@ def menu():
             try:
                 calcola_determinante(matrice)
             except:
-                print("La matrice non è quadrata, impossibile calcolare il determinante.")
+                print("La matrice non presente o non quadrata, impossibile calcolare il determinante.")
         elif scelta == '0':
             print("Arrivederci.")
             break
