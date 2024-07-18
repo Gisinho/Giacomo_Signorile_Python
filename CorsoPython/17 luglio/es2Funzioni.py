@@ -17,6 +17,7 @@ decrescente.
 Visualizzare il numero di vendite per ogni città."""
 
 import pandas as pd
+
 def crea_dataframe():
     data = {
         'Prodotto': ['Mela', 'Pera', 'Banana', 'Caco', 'Ciliegie'],
@@ -45,14 +46,16 @@ def citta_massime_vendite(df):
     print(df.groupby('Città')['Totale Vendite'].sum().idxmax())
     
 def df_maggiori_vendite(df):
-    df2 = df[df['Totale Vendite'] > 120]
-    print("Vendite maggiori di 120 euro: ")
+    numero = int(input("Inserisci il minimo valore di vendite desiderato: "))
+    df2 = df[df['Totale Vendite'] > numero]
+    print(f"Vendite maggiori di {numero} euro: ")
     print(df2)
 
 def vendite_desc(df):
     df_ordinato = df.sort_values(by='Totale Vendite', ascending=False)
     print("\nDataFrame ordinato per 'Totale Vendite' in ordine decrescente:")
     print(df_ordinato)
+
 def quantita_per_citta(df):
     print("\n",df.groupby('Città')['Quantità'].sum())
 
