@@ -20,56 +20,87 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Generazione dei Dati
-giorni = 365
-media_visitatori = 2000
-deviazione_standard = 500
+def genera_dati(giorni=365, media_visitatori=2000, deviazione_standard=500):
+    # Impostiamo un range che approssima la media e la deviazione standard
+    min_visitatori = media_visitatori - 2 * deviazione_standard
+    max_visitatori = media_visitatori + 2 * deviazione_standard
+    # Generazione dei visitatori giornalieri
+    visitatori = np.random.randint(min_visitatori, max_visitatori, size=giorni)
+    #aumento graduale fino a 500visitatori in piu
+    trend = np.linspace(0, 500, giorni)
+    #aggiungo trend crescente ai dati simulati
+    visitatori = visitatori+ trend
+    print(visitatori)
+    return visitatori
 
-# Impostiamo un range che approssima la media e la deviazione standard
-min_visitatori = media_visitatori - 2 * deviazione_standard
-max_visitatori = media_visitatori + 2 * deviazione_standard
+def crea_dataframe(visitatori, giorni=365):
+    date = pd.date_range(start='2023-01-01', periods=giorni, freq='D')
+    df = pd.DataFrame({'Date': date, 'Visitatori': visitatori})
+    df.set_index('Date', inplace=True)#utilizzato per modificare il df e settare Date come indice
+    return df
 
-# Generazione dei visitatori giornalieri
-visitatori = np.random.randint(min_visitatori, max_visitatori, size=giorni)
+def analizza_dati(df):
+    media_mensile = df.resample('ME').mean()
+    dev_mensile = df.resample('ME').std()
+    return media_mensile, dev_mensile
 
-#aumento graduale fino a 500visitatori in piu
-trend= np.linspace(0,500,giorni)
+def visualizza_dati(df, media_mensile):
+    #media mobile 7 giorni
+    media_mobile = df['Visitatori'].rolling(window=7).mean()
+    #Grafico a linee del numero di visitatori giornalieri
+    plt.figure(figsize=(14, 7))
+    plt.plot(df.index, df['Visitatori'], label='Visitatori giornalieri')
+    plt.plot(df.index, media_mobile, label='Media mobile a 7 giorni', linestyle='--', color='orange')
+    plt.title('Numero di visitatori giornalieri con Media Mobile a 7 Giorni')
+    plt.xlabel('Data')
+    plt.ylabel('Numero di visitatori')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 
-#aggiungo trend crescente ai dati simulati
-visitatori= visitatori+trend
-print(visitatori)
+    # Grafico della media mensile dei visitatori
+    plt.figure(figsize=(14, 7))
+    plt.plot(media_mensile.index, media_mensile['Visitatori'])
+    plt.title('Media mensile dei visitatori')
+    plt.xlabel('Mese')
+    plt.ylabel('Numero di visitatori')
+    plt.show()
 
-"""Creazione dataframe"""
-date = pd.date_range(start='2023-01-01', periods=giorni, freq='D')
-df = pd.DataFrame({'Date':date, 'Visitatori':visitatori})
+def menu():
+    df = None
+    media_mensile = None
+    
+    while True:
+        print("\nMenu:")
+        print("1. Genera i dati")
+        print("2. Analizza i dati (Media mensile e deviazione standard)")
+        print("3. Visualizza i dati")
+        print("0. Esci")
+        
+        scelta = input("Scegli un'opzione: ")
 
-df.set_index('Date', inplace=True)#utilizzato per modificare il df e settare Date come indice
-print(df)
+        if scelta == '1':
+            visitatori = genera_dati()
+            df = crea_dataframe(visitatori)
+            print(df)
+            print("Dati generati e DataFrame creato.")
+        elif scelta == '2':
+            if df is not None:
+                media_mensile, dev_mensile = analizza_dati(df)
+                print("\nMedia mensile dei visitatori:\n", media_mensile)
+                print("\nDeviazione standard mensile:\n", dev_mensile)
+            else:
+                print("Errore: Devi prima generare i dati.")
+        elif scelta == '3':
+            if df is not None:
+                media_mensile, _ = analizza_dati(df)
+                visualizza_dati(df, media_mensile)
+            else:
+                print("Devi prima generare i dati.")
+        elif scelta == '0':
+            print("Arrivederci")
+            break
+        else:
+            print("Opzione non valida.")
 
-
-media_mensile=df.resample('ME').mean()
-print("\nMedia mensile dei visitatori:\n", media_mensile)
-
-dev_mensile=df.resample('ME').std()
-print("\nDeviazione standard mensile:\n", dev_mensile)
-
-
-
-#Grafico a linee del numero di visitatori giornalieri
-plt.figure()
-plt.plot(df.index, df['Visitatori'], label='Visitatori giornalieri')
-plt.title('Numero di visitatori giornalieri')
-plt.xlabel('Date')
-plt.ylabel('Numero di visitatori')
-plt.legend()
-plt.grid(True)
-plt.show()
-
-
-# Grafico della media mensile dei visitatori
-plt.figure()
-plt.plot(media_mensile.index, media_mensile['Visitatori'])
-plt.title('Media mensile dei visitatori')
-plt.xlabel('Mese')
-plt.ylabel('Numero di visitatori')
-plt.show()
+menu()
