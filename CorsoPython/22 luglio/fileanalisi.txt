@@ -1,0 +1,23 @@
+Generazione dei Dati
+Creare il set di dati casuali di 365 giorni di dati con randint.
+Usare un ciclo per simulare l'incremento della popolarità
+Tempo stimato: 15 minuti
+
+Creazione dataframe
+Utilizzare pandas per creare il dataframe.
+Tempo stimato: 15 minuti
+
+
+Analisi dei dati:
+Utilizzare il metodo groupby di pandas per calcolare le vendite totali per ogni prodotto.
+Tempo stimato: 10 minuti
+
+Analisi e Interpretazione dei Risultati
+Analizzare i risultati ottenuti dal dataframe e dal metodo groupby con i metodi mean e std.
+Tempo stimato: 15 minuti
+
+
+Visualizzazione dei dati
+Usare matplotlib per creare un grafico a linee e creare secondo grafico
+Tempo stimato: 20 minuti
+Totale Tempo Stimato: 1 ora e 15 minuti
